@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { AuthProvider } from './context/AuthProvider';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store, persistor } from "./app/store";
+import { PersistGate } from "redux-persist/integration/react";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { initializeAxiosInstance } from "./Utils/Interceptor/AxiosInstance";
 
-ReactDOM.render(
+initializeAxiosInstance(store.dispatch);
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
