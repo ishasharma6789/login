@@ -13,20 +13,30 @@ label,
 }
 
 .sign__in__button {
-  background-color: #FF595A;
+  background-color: #ff595a;
   padding: 0.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 22px;
 }
 
-.login__section{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 1rem 0.5rem;
+.google__signin__button{
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  font-size: 0.95rem;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.login__section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 1rem 0.5rem;
 }
 
 .instructions {

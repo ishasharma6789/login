@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:3001";
+const baseURL = "https://yoco-api.onrender.com";
 
 export let axiosInstance = null;
 
@@ -12,17 +12,15 @@ export const initializeAxiosInstance = (store) => {
   });
   // Use store in your interceptor here
   // Request interceptor
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      const state = store.getState();
-      const token = state.auth2.token.accessToken;
-      config.headers.Authorization = `Bearer ${token}`;
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
+  // axiosInstance.interceptors.request.use(
+  //   (config) => {
+  //     config.headers.Authorization = `Bearer ${token}`;
+  //     return config;
+  //   },
+  //   (error) => {
+  //     return Promise.reject(error);
+  //   }
+  // );
   // Response interceptor
   axiosInstance.interceptors.response.use(
     (response) => {

@@ -1,5 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { FcGoogle } from "react-icons/fc";
+import { signInWithGoogle } from "../../firebase/firebase";
 import "./Login.css";
 
 const Login = () => {
@@ -10,6 +13,7 @@ const Login = () => {
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     userRef.current.focus();
@@ -92,6 +96,16 @@ const Login = () => {
             />
             <button className="sign__in__button">Sign In</button>
           </form>
+
+          <button
+            onClick={(e) => {
+              dispatch(signInWithGoogle(dispatch));
+            }}
+            className="google__signin__button"
+          >
+            <FcGoogle size={30}/>
+            Google
+          </button>
           <p>
             Need an Account?
             <br />

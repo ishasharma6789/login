@@ -3,8 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 80vh;
+  min-width: 100%;
   padding: 1rem 0.5rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.input__section-done {
+  min-width: 57%;
 }
 
 .add-upload {
@@ -14,8 +20,8 @@
   flex-direction: column;
   width: 75%;
   height: 30vh;
-  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='19' ry='19' stroke='white' stroke-width='4' stroke-dasharray='3%2c 20' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-  border-radius: 19px;
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='11' ry='11' stroke='%23504F4CFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 11px;
   border-spacing: 10px;
   margin-top: -11%;
   border-collapse: separate;
@@ -23,7 +29,7 @@
 
 .create__button1 {
   background-color: #ff595a;
-  color: #001233;
+  color: #000102;
   padding: 0.5rem;
   border-radius: 10px;
   font-size: 0.75rem;
@@ -33,9 +39,41 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+
+.create__button1:active{
+  transform: scale(0.85);
 }
 
 .pdf__icon {
   width: 50px;
   height: auto;
+}
+
+.add-upload p {
+  color: #504f4c;
+  margin-top: 2%;
+}
+
+.view__document{
+  width: 75%;
+  margin-top: 3%;
+}
+
+.view__document button{
+  background-color: #ff595a;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.view__document button:active{
+  transform: scale(0.85);
 }

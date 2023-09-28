@@ -1,50 +1,78 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import "./FileInput.css";
 import { AiOutlineFileAdd } from "react-icons/ai";
+import { useDropzone } from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import { setFile, setFileName } from "../../Features/File/FileSlice";
+import { uploadFile } from "../../Features/File/FileActions";
 
-const FileInput = () => {
+const FileInput = ({ showDoc, setShowDoc }) => {
   const inputRef = useRef();
-  const [File, setFile] = useState(null);
-  const [Name, setName] = useState();
-
-  console.log(File);
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.file.name);
 
   const triggerFileSelect = () => inputRef.current.click();
 
-  const onSelectFile = (event) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.addEventListener("load", () => {
-        setFile(reader.result);
-        setName(event.target.files[0].name);
-      });
-    }
-  };
+  const Upload = useCallback(
+    (Name, File) => {
+      dispatch(uploadFile({ file: File, email: "test", name: Name }));
+    },
+    [dispatch]
+  );
+
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      if (acceptedFiles && acceptedFiles.length > 0) {
+        // Assuming you want to upload the first selected file
+        const file = acceptedFiles[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.addEventListener("load", () => {
+          dispatch(setFile(reader.result));
+          dispatch(setFileName(file.name));
+          Upload(file.name, reader.result);
+        });
+      }
+    },
+    [dispatch, Upload]
+  );
+
+  const message = useSelector((state) => state.file.message);
+  console.log(message);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "application/pdf", // Define the file type(s) you want to accept
+  });
+
   return (
-    <div className="input__section">
+    <div
+      className={
+        !showDoc ? "input__section" : "input__section input__section-done"
+      }
+    >
       <div>
         <input
           type="file"
-          accept="application/pdf"
           ref={inputRef}
-          onChange={onSelectFile}
+          name="file"
           style={{ display: "none" }}
+          {...getInputProps()}
         />
       </div>
-      <div className="add-upload">
+      <div className="add-upload" {...getRootProps()}>
         <svg
-          fill="#ffffff"
+          fill="#504f4c"
           height="200px"
           width="200px"
           version="1.1"
           id="Capa_1"
           xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
           viewBox="0 0 487.887 487.887"
           xmlSpace="preserve"
           className="pdf__icon"
-          stroke="#ffffff"
+          stroke="#504f4c"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
@@ -60,7 +88,7 @@ const FileInput = () => {
           <AiOutlineFileAdd size={25} />
           Choose Files
         </button>
-        {File ? <p>{Name}</p> : <p>or Drop PDF&apos;s here</p>}
+        {File ? <p>{name}</p> : <p>or Drop PDF&apos;s here</p>}
       </div>
     </div>
   );

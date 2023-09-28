@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap");
 
 * {
   margin: 0;
@@ -14,8 +15,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
-  background-color: #001233;
+  background-color: #eae8dc;
 }
 
 section {
@@ -26,7 +26,8 @@ section {
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.759);
+  border-radius: 20px;
 }
 
 form {
@@ -40,6 +41,7 @@ form {
 a {
   color: #fff;
   text-decoration: none;
+  font-family: "Oxygen", sans-serif;
 }
 
 a:hover {
