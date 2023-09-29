@@ -10,12 +10,14 @@ const FileInput = ({ showDoc, setShowDoc }) => {
   const inputRef = useRef();
   const dispatch = useDispatch();
   const name = useSelector((state) => state.file.name);
+  const user = useSelector((state) => state.auth.user);
 
+  console.log(user);
   const triggerFileSelect = () => inputRef.current.click();
 
   const Upload = useCallback(
     (Name, File) => {
-      dispatch(uploadFile({ file: File, email: "test", name: Name }));
+      dispatch(uploadFile({ file: File, email: user.email, name: Name }));
     },
     [dispatch]
   );
@@ -88,7 +90,7 @@ const FileInput = ({ showDoc, setShowDoc }) => {
           <AiOutlineFileAdd size={25} />
           Choose Files
         </button>
-        {File ? <p>{name}</p> : <p>or Drop PDF&apos;s here</p>}
+        <p>or Drop PDF&apos;s here</p>
       </div>
     </div>
   );
